@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-sm-3">
+      <div>
+        <ul>
+          <li class="list-unstyled">
+            <div class="rounded">
+              <% if @user.user_image? %>
+                <%= image_tag @user.user_image.url, :image => "mw50" %>
+              <% else %>
+                <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 200 }) %>" alt="">
+              <% end %>
+            </div>
+          </li>
+          <li class="list-unstyled"><h3 class=""><%= @user.name %></h3></li>
+          <li class="list-unstyled"><%= @user.introdcution %></li>
+          <% if current_user == @user %>
+            <li class="list-unstyled"><p><%= link_to '編集', edit_user_path, class: 'btn btn-lg btn-success btn-sm' %></p></li>
+          <% end %>
+        </ul>
+　　　</div>
+    </div>
+</div>
+
+
+
+  
+
+            
+
+<div class="border-top border-dark" style="padding:10px;">  
+<div class="row">
+  <% @microposts.each do |micropost| %>
+     <div class="col-md-3 pt-4">
+       <div class="card">
+        <div class="card-header">
+         <p><%= image_tag micropost.movie.url %></p>
+        </div>
+        <div class="card-body">
+         <p><%= link_to micropost.user.name, user_path(micropost.user) %></p>
+         <p>タイトル:<%= link_to micropost.title.truncate(10), micropost_path(micropost.user) %></p>
+        </div>
+       </div>
+     </div>
+  <% end %>
+</div>
+</div>   
+
+

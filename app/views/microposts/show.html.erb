@@ -1,0 +1,16 @@
+<h1>投稿詳細ページ</h1>
+<p><%= link_to @micropost.user.name, user_path(@micropost.user) %></p>
+
+<div>
+  <%= @micropost.movie %>
+  <%= @micropost.title %>
+  <p>トレーニングメニュー</p>
+  <%= @micropost.process %>
+  <p>アドバイス</p>
+  <%= @micropost.advice %>
+</div>
+
+<% if current_user == @micropost.user %>
+  <%= link_to 'このメッセージを編集する', edit_micropost_path(@micropost) %>
+  <%= link_to 'このメッセージを削除する', @micropost, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+<% end %>
