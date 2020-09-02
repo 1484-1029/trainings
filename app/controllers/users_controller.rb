@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = current_user.microposts.order(id: :desc).page(params[:page])
+    counts(@user)
   end
 
   def new
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
 
       if @user.update(user_params)
         flash[:success] = 'ユーザー情報を編集しました。'
-        redirect_to :show
+        redirect_to @user
       else
         flash.now[:danger] = 'ユーザー情報の編集に失敗しました。'
         render :edit
@@ -46,6 +47,18 @@ class UsersController < ApplicationController
     else
         redirect_to root_url
    end
+   
+   def followings
+    @user = User.find(params[:id])
+    @followings = @user.followings.page(params[:page])
+    counts(@user)
+   end
+  
+    def followers
+      @user = User.find(params[:id])
+      @followers = @user.followers.page(params[:page])
+      counts(@user)
+    end
   end
 
   private

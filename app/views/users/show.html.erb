@@ -1,48 +1,56 @@
 <div class="row">
-    <div class="col-sm-3">
-      <div>
-        <ul>
-          <li class="list-unstyled">
-            <div class="rounded">
-              <% if @user.user_image? %>
-                <%= image_tag @user.user_image.url, :image => "mw50" %>
-              <% else %>
-                <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 200 }) %>" alt="">
-              <% end %>
-            </div>
-          </li>
-          <li class="list-unstyled"><h3 class=""><%= @user.name %></h3></li>
-          <li class="list-unstyled"><%= @user.introdcution %></li>
+    <aside class="col-sm-3">
+      <div class="img">
+        <% if @user.user_image? %>
+          <%= image_tag @user.user_image.url, width: "250px", height: "250px" %>
+        <% else %>
+          <img class="img" src="<%= gravatar_url(@user, { size: 250 }) %>" alt="">
+        <% end %>
+    </aside>
+    <div class="col-sm-9">
+      <ul>
+        <li class="list-unstyled"><h3 class=""><%= @user.name %></h3></li>
+        <li class="list-unstyled"><%= @user.introdcution %></li>
+        <li class="list-unstyled"><a href="<%= followings_user_path(@user) %>"  <%= 'active' if current_page?(followings_user_path(@user)) %>> フォロー  <span class="badge badge-secondary"><%= @count_followings %></span></a></li>
+        <li class="list-unstyled"><a href="<%= followers_user_path(@user) %>"  <%= 'active' if current_page?(followers_user_path(@user)) %>> フォロワー  <span class="badge badge-secondary"><%= @count_followers %></span></a></li>
+        <li class="list-unstyled"><%= render 'relationships/follow_button', user: @user %></li>
+        <div class="pt-4">
           <% if current_user == @user %>
-            <li class="list-unstyled"><p><%= link_to '編集', edit_user_path, class: 'btn btn-lg btn-success btn-sm' %></p></li>
+            <li class="list-unstyled"><h2><%= link_to '編集', edit_user_path, class: 'btn btn-lg btn-success btn-sm' %></h2></li>
           <% end %>
-        </ul>
-　　　</div>
+        </div>
+      </ul>
     </div>
+
+    <div class="border-top border-dark mt-3" style="padding:10px;">  
+      <div class="row">
+        <% @microposts.each do |micropost| %>
+           <div class="col-md-3 pt-1 pr-1 pl-1">
+             <div class="card">
+              <div class="card-header">
+               <p><%= video_tag micropost.movie.url, width: "100%", height: "120%", controls: true, autobuffer: true %></p>
+              </div>
+              <div class="card-body">
+               <p>タイトル<:span> <%= link_to micropost.title.truncate(10), micropost_path(micropost) %></:span></p>
+              </div>
+             </div>
+           </div>
+        <% end %>
+      </div>
+    </div>   
 </div>
 
 
-
-  
-
+    
+      
+      
+      
+      
+      
+      
+      
             
-
-<div class="border-top border-dark" style="padding:10px;">  
-<div class="row">
-  <% @microposts.each do |micropost| %>
-     <div class="col-md-3 pt-4">
-       <div class="card">
-        <div class="card-header">
-         <p><%= image_tag micropost.movie.url %></p>
-        </div>
-        <div class="card-body">
-         <p><%= link_to micropost.user.name, user_path(micropost.user) %></p>
-         <p>タイトル:<%= link_to micropost.title.truncate(10), micropost_path(micropost.user) %></p>
-        </div>
-       </div>
-     </div>
-  <% end %>
-</div>
-</div>   
-
-
+        
+          
+         
+          

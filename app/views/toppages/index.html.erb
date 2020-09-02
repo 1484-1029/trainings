@@ -1,6 +1,6 @@
 <% if logged_in? %>
   <div class="pb-4">
-    <h1>筋トレ標準一覧</h1>
+    <h1>トレーニング一覧</h1>
   </div>
   <div class="row">
     <div class="col-md-12 border-dark border-top" style="padding:10px;">
@@ -8,14 +8,14 @@
     </div>
   </div>
 <% else %>
-  <div class="jumbotron">
-  <div class="row">
-    <div class="col-md-6">
-      <h1>筋トレ標準</h1>
-      <p>このWebサイトは、筋トレ動画を投稿するのポートフォリオサイトです。<br>筋トレ好きでシェアハピしましょう!</p>
-      <%= link_to '新規登録', signup_path, class: 'btn btn-lg btn-primary' %>
-      <%= link_to 'ログイン', login_path, class: 'btn btn-lg btn-success' %>
+  <div class=" main">
+    <div class="row">
+      <div class="col-md-12 content">
+        <h1>トレーニング標準</h1>
+        <p>このWebサイトは、筋トレ動画を投稿するのポートフォリオサイトです。<br>トレーニング好きでシェアハピしましょう!</p>
+        <%= link_to '新規登録', signup_path, class: 'btn btn-lg btn-primary' %>
+        <%= link_to 'ログイン', login_path, class: 'btn btn-lg btn-success' %>
+      </div>
     </div>
   </div>
-</div>
 <% end %>

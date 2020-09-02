@@ -1,16 +1,50 @@
 <h1>投稿詳細ページ</h1>
-<p><%= link_to @micropost.user.name, user_path(@micropost.user) %></p>
 
-<div>
-  <%= @micropost.movie %>
-  <%= @micropost.title %>
-  <p>トレーニングメニュー</p>
-  <%= @micropost.process %>
-  <p>アドバイス</p>
-  <%= @micropost.advice %>
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-12 border-dark border-top" style="padding:10px;">
+        <aside>
+          <div class="col-md-8">
+          <p><%= link_to @micropost.user.name, user_path(@micropost.user) %></p>
+          <table class="table table-striped table-bordered">
+             <tr>
+               <td>■ タイトル</td>
+             </tr>
+             <tr>
+               <td><%= @micropost.title %></td>
+             </tr>
+             <tr>
+               <td>■ 動画</td>
+             </tr>
+             <tr>
+               <td class="movie">
+                 <%= video_tag @micropost.movie.url, width: "100%", height: "100%", controls: true, autobuffer: true %>
+               </td>
+             </tr>
+             <tr>
+               <td>■ トレーニングメニュー</td>
+             </tr>
+             <tr>
+               <td><%=simple_format(@micropost.process)%></td>
+             </tr>
+             <tr>
+               <td>■ アドバイス</td>
+             </tr>
+             <tr>
+              <td><%=simple_format(@micropost.advice)%></td>
+             </tr>
+            </table>
+            <% if current_user == @micropost.user %>
+              <%= link_to '編集', edit_micropost_path(@micropost), class: 'btn btn-success btn-sm' %>
+              <%= link_to "削除", micropost_path(@micropost), method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+      　   　<% end %>
+          </div>
+        </aside>
+      </div>
+   </div>
 </div>
+  
 
-<% if current_user == @micropost.user %>
-  <%= link_to 'このメッセージを編集する', edit_micropost_path(@micropost) %>
-  <%= link_to 'このメッセージを削除する', @micropost, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
-<% end %>
+
+
+

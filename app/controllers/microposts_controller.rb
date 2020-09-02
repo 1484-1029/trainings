@@ -34,14 +34,14 @@ class MicropostsController < ApplicationController
     else
       @microposts = current_user.microposts.order(id: :desc).page(params[:page])
       flash.now[:danger] = '投稿失敗'
-      render 'toppages/index'
+      render 'microposts/new'
     end
   end
 
   def destroy
     @micropost.destroy
     flash[:success] = 'メッセージを削除しました。'
-    redirect_back(fallback_location: root_path)
+    redirect_to root_url
   end
 
   private

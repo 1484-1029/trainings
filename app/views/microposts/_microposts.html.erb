@@ -1,15 +1,14 @@
 <div class="row">
   <% microposts.each do |micropost| %>
-     <div class="col-md-3 pt-4">
-       <div class="card">
-        <div class="card-header">
-         <p><%= image_tag micropost.movie.url %></p>
+     <div class="col-md-3 pt-1 pr-1 pl-1">
+      <div class="card">
+       <div class="card-header">
+         <p><%= video_tag micropost.movie.url, width: "100%", height: "100%", controls: true, autobuffer: true %></p>
         </div>
         <div class="card-body">
-         <p><%= link_to micropost.user.name, user_path(micropost.user) %></p>
-         <p>タイトル:<%= link_to micropost.title, micropost_path(micropost.user) %></p>
+         <p>タイトル:<%= link_to micropost.title, micropost_path(micropost) %></p>
         </div>
-       </div>
+      </div>
      </div>
   <% end %>
 </div>
